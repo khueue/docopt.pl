@@ -4,8 +4,6 @@
         docopt/2
     ]).
 
-% :- include(misc(common)).
-
 %%  version(?Version) is semidet.
 %
 %   True if Version is a list representing the major, minor
@@ -13,8 +11,10 @@
 
 version([0,0,1]).
 
-%%  docopt(+DocAtom, -Args) is semidet.
+%%  docopt(+Doc, ?Options) is semidet.
 %
-%   XXX
+%   True if Doc is a help string atom and Options
+%   is the corresponding command line arguments given to
+%   the program, according to the docopt specification.
 
 docopt('', []).

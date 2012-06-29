@@ -22,8 +22,6 @@ setup_path(PathPrefix, PathSuffix, Name) :-
 :- setup_globals.
 :- setup_load_paths.
 
-% :- include(misc(common)).
-
 test :-
     load_project_modules,
     load_project_tests,

@@ -1,5 +1,3 @@
-% :- include(misc(common)).
-
 :- begin_tests('docopt:docopt/2').
 
 test('empty doc gives no options', [true(Actual == Expected)]) :-
