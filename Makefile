@@ -1,18 +1,22 @@
 PROLOG = swipl -O
 
 .PHONY: all
-all: trim test
+all: prepare test
 
-# Remove trailing whitespace and such. Not important.
-.PHONY: trim
-trim:
+.PHONY: prepare
+prepare:
 	clear
-	@- trim *.md *.pl* src/*.pl*
 
 .PHONY: test
 test:
 	@ echo "--- Run tests and exit ..."
 	time $(PROLOG) -s load -g test -t halt
+
+# TODO: Coverage doesn't seem to work at all.
+.PHONY: cov
+cov:
+	@ echo "--- Run tests, print test coverage and exit ..."
+	$(PROLOG) -s load -g cov -t halt
 
 .PHONY: repl
 repl:
