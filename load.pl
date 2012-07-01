@@ -3,7 +3,9 @@
 
 setup_globals :-
     % For optimized compiles, tests are by default ignored.
-    set_test_options([load(always)]).
+    set_test_options([load(always)]),
+    % For maximum compatibility.
+    set_prolog_flag(language, iso).
     % Try to make everything as UTF-8 as possible.
     % set_prolog_flag(encoding, utf8). % When using streams, global setting.
     % Hunting implicit dependencies is easier without autoload.
