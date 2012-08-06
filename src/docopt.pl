@@ -14,8 +14,8 @@
 
 %%  version(?Version) is semidet.
 %
-%   True if Version is a list representing the major, minor
-%   and patch version numbers of this library.
+%   True if Version is a list representing the major, minor and patch version
+%   numbers of this library.
 
 version([0,0,1]).
 
@@ -33,13 +33,14 @@ docopt(Doc, Options) :-
 %%  program_arguments(?ProgramArgs) is semidet.
 %
 %   True if ProgramArgs is the list of arguments given to the program
-%   excluding system arguments ('swipl -O' etc.).
+%   excluding system arguments ('swipl -O' etc.). System and program
+%   arguments are separated by the atom '--'.
 
 program_arguments(ProgramArgs) :-
     core:current_prolog_flag(argv, AllArgs),
     core:append(_SystemArgs, [--|ProgramArgs], AllArgs).
 
-%%  docopt
+%%  docopt/3
 %
 %   XXX
 
@@ -49,24 +50,24 @@ docopt(DocChars, Args, Options) :-
     core:write(DocChars),
     Options = [].
 
-%%  xxxdoc_empty(?Doc) is semidet.
+%%  args_empty(?Args) is semidet.
 %
-%   True if Doc is an empty BSON document.
+%   True if Args is an empty argument collection.
 
 args_empty([]).
 
-%%  args_get(+Doc, +Key, ?Value) is semidet.
+%%  args_get(+Args, +Key, ?Value) is semidet.
 %
-%   True if Value is the value associated with Key in Doc,
-%   or fails if Key is not found or does not match Value.
+%   True if Value is the value associated with Key in Args.
+%   Fails if Key is not found or does not match Value.
 
 args_get([K-V|_], K, V) :- !.
 args_get([_|Pairs], K, V) :-
     args_get(Pairs, K, V).
 
-%%  args_put(+Doc, +Key, +Value, ?NewDoc) is semidet.
+%%  args_put(+Args, +Key, +Value, ?NewArgs) is semidet.
 %
-%   True if NewDoc is Doc with the addition or update of the
+%   True if NewArgs is Args with the addition or update of the
 %   association Key-Value.
 
 args_put([], K, V, [K-V]).
