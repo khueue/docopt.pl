@@ -30,6 +30,11 @@ docopt(Doc, Options) :-
     core:atom_chars(Doc, DocChars),
     docopt(DocChars, ProgramArgs, Options).
 
+%%  program_arguments(?ProgramArgs) is semidet.
+%
+%   True if ProgramArgs is the list of arguments given to the program
+%   excluding system arguments ('swipl -O' etc.).
+
 program_arguments(ProgramArgs) :-
     core:current_prolog_flag(argv, AllArgs),
     core:append(_SystemArgs, [--|ProgramArgs], AllArgs).
