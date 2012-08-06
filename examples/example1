@@ -1,0 +1,18 @@
+#!/usr/bin/env swipl --quiet -O -t main -f
+
+:- [load].
+:- use_module(docopt(docopt)).
+
+usage('Usage: example1 arg1 arg2 arg3 ...').
+
+main :-
+    catch(run, E, (print_message(error, E), fail)),
+    halt(0).
+main :-
+    halt(1).
+
+run :-
+    usage(Usage),
+    core:format('~w~n', [Usage]),
+    docopt:program_arguments(Args),
+    core:format('~w~n', [Args]).

@@ -1,8 +1,0 @@
-#!/usr/bin/env swipl --quiet -O -t go -f
-
-:- [load].
-:- use_module(docopt(docopt)).
-
-go :-
-    docopt:program_arguments(Args),
-    write(Args), nl.
