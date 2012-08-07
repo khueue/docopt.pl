@@ -8,4 +8,4 @@ Icon?
 .Trashes
 
 *.txt
-querylog.pl
+repl_log.pl
