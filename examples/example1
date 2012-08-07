@@ -1,9 +1,7 @@
 #!/usr/bin/env swipl --quiet -O -t main -f
 
-:- encoding(utf8).
-
 :- [load].
-:- use_module(docopt(docopt)).
+:- use_module(docopt(docopt), []).
 
 usage('Usage: examples/example1 arg1 arg2 arg3 ...').
 

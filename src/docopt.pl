@@ -4,13 +4,15 @@
         docopt/2
     ]).
 
-:- encoding(utf8).
-
 /** <module> Docopt parser.
  *
  *  This module contains predicates for the docopt command line argument
  *  parser. See <http://docopt.org/>.
- */
+*/
+
+:- include(docopt(common)).
+
+:- use_module(docopt(parsing), []).
 
 %%  version(?Version) is semidet.
 %
@@ -34,21 +36,27 @@ docopt(Doc, Options) :-
 %
 %   True if ProgramArgs is the list of arguments given to the program
 %   excluding system arguments ('swipl -O' etc.). System and program
-%   arguments are separated by the atom '--'.
+%   arguments are separated by two dashes.
 
 program_arguments(ProgramArgs) :-
     core:current_prolog_flag(argv, AllArgs),
     core:append(_SystemArgs, [--|ProgramArgs], AllArgs).
 
-%%  docopt/3
+%%  docopt is semidet.
 %
 %   XXX
 
 docopt([], _, []) :- !.
-docopt(DocChars, Args, Options) :-
-    core:write(Args),
-    core:write(DocChars),
-    Options = [].
+docopt(Doc, _Args, DocCharsLower) :-
+    atom_chars(Doc, DocChars),
+    downcase_atom(Doc, DocLower),
+    atom_chars(DocLower, DocCharsLower),
+    phrase(parse_usage(ProgramName), DocCharsLower, Rest).
+
+parse_usage(ProgramName) -->
+    [u,s,a,g,e,:],
+    parsing:skip_spaces,
+    parsing:word(ProgramName).
 
 %%  args_empty(?Args) is semidet.
 %
