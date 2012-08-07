@@ -1,4 +1,4 @@
-:- encoding(utf8).
+:- include(docopt(common)).
 
 :- begin_tests('docopt:docopt/3').
 
