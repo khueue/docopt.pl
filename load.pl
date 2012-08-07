@@ -50,7 +50,7 @@ run_test_suite :-
     core:format('~n% Run tests ...~n'),
     plunit:run_tests.
 
-% TODO: Coverage doesn't seem to work at all.
+% TODO: Coverage doesn't seem to work at all. Fixed in newer SWI?
 run_test_suite_with_coverage :-
     core:format('~n% Run tests ...~n'),
     plunit:show_coverage(plunit:run_tests).
