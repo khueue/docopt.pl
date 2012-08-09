@@ -55,7 +55,7 @@ docopt(Doc, _Args, DocCharsLower) :-
 
 parse_usage(ProgramName) -->
     [u,s,a,g,e,:],
-    parsing:skip_spaces,
+    parsing:skip_white,
     parsing:word(ProgramName).
 
 %%  args_empty(?Args) is semidet.

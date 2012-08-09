@@ -3,7 +3,7 @@
         word/3,
         alnum/3,
         alnums/3,
-        skip_spaces/2
+        skip_white/2
     ]).
 
 /** <module> Low-level DCGs for parsing.
@@ -25,9 +25,9 @@ alnums([C|Cs]) -->
     alnums(Cs).
 alnums([]) --> [].
 
-skip_spaces -->
+skip_white -->
     [C],
     { core:char_type(C, white) },
     !,
-    skip_spaces.
-skip_spaces --> [].
+    skip_white.
+skip_white --> [].
