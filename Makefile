@@ -12,7 +12,7 @@ test:
 	@ echo "--- Run tests and exit ..."
 	time $(PROLOG) -s load -g test -t halt
 
-# TODO: Coverage doesn't seem to work at all.
+# TODO: Coverage doesn't seem to work at all. Fixed in newer SWI?
 .PHONY: cov
 cov:
 	@ echo "--- Run tests, print test coverage and exit ..."

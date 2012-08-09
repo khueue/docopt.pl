@@ -31,8 +31,9 @@ test :-
 
 repl :-
     load_project_modules,
+    load_project_tests,
     use_module(library(test_wizard), []),
-    set_prolog_flag(log_query_file, 'querylog.pl').
+    set_prolog_flag(log_query_file, 'repl_log.pl').
 
 cov :-
     load_project_modules,
@@ -50,7 +51,7 @@ run_test_suite :-
     core:format('~n% Run tests ...~n'),
     plunit:run_tests.
 
-% TODO: Coverage doesn't seem to work at all.
+% TODO: Coverage doesn't seem to work at all. Fixed in newer SWI?
 run_test_suite_with_coverage :-
     core:format('~n% Run tests ...~n'),
     plunit:show_coverage(plunit:run_tests).
