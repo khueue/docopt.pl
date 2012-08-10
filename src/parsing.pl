@@ -12,8 +12,18 @@
 :- include(docopt(common)).
 
 word(Word) -->
-    alnums(Cs),
+    csyms(Cs),
     { core:atom_chars(Word, Cs) }.
+
+csym(C) -->
+    [C],
+    { core:char_type(C, csym) }.
+
+csyms([C|Cs]) -->
+    csym(C),
+    !,
+    csyms(Cs).
+csyms([]) --> [].
 
 alnum(C) -->
     [C],

@@ -42,16 +42,18 @@ program_arguments(ProgramArgs) :-
     core:current_prolog_flag(argv, AllArgs),
     core:append(_SystemArgs, [--|ProgramArgs], AllArgs).
 
-%%  docopt is semidet.
+%%  docopt(+Doc, +Args, ?Options) is semidet.
 %
-%   XXX
+%   True if Options is the collection of arguments compiled from the
+%   usage atom Doc and the arguments Args.
 
-docopt([], _, []) :- !.
-docopt(Doc, _Args, DocCharsLower) :-
-    atom_chars(Doc, DocChars),
-    downcase_atom(Doc, DocLower),
-    atom_chars(DocLower, DocCharsLower),
-    phrase(parse_usage(ProgramName), DocCharsLower, Rest).
+docopt('', _Args, []) :- !.
+docopt(Doc, _Args, Options) :-
+    core:atom_chars(Doc, _DocChars),
+    core:downcase_atom(Doc, DocLower),
+    core:atom_chars(DocLower, DocCharsLower),
+    core:phrase(docopt:parse_usage(_ProgramName), DocCharsLower, _Rest),
+    Options = [].
 
 parse_usage(ProgramName) -->
     [u,s,a,g,e,:],
